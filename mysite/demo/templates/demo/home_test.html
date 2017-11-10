@@ -1,0 +1,67 @@
+
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+		var SNR = {{series.snr|safe }};
+        var data = new google.visualization.DataTable();
+		data.addColumn('number','Timestamp');
+		data.addColumn('number','SNR');
+		
+		data.addRows(SNR);
+		var options = {
+			chart: {
+			  title: 'SNR of tag detection',
+			  subtitle: 'Unix timestamp in x-axis'
+			},
+			width: 600,
+			height: 300,
+			annotations: {
+				datum: {
+					stem: {
+						length: 12
+					}
+				}
+			}
+		 };
+		
+        var chart = new google.charts.Line(document.getElementById('SNR'));
+
+		chart.draw(data, google.charts.Line.convertOptions(options));
+      }
+    </script>
+	<script type="text/javascript">
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+		var TEMP = {{series.temp|safe }};
+        var data = new google.visualization.DataTable();
+		data.addColumn('number','Timestamp');
+		data.addColumn('number','TEMP');
+		
+		data.addRows(TEMP);
+		var options = {
+			chart: {
+			  title: 'Temperature of TBR',
+			  subtitle: 'Unix timestamp in x-axis'
+			},
+			width: 600,
+			height: 300
+		 };
+		
+        var chart = new google.charts.Line(document.getElementById('TEMP'));
+
+		chart.draw(data, google.charts.Line.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="TEMP"></div>
+	<div id="SNR"></div>
+  </body>
+</html>
